@@ -49,8 +49,8 @@ public class JobRestController {
         }
         Job newImportJob = jobService.startNewJob(JobType.IMPORT);
         String importFileName = newImportJob.getId().toString() + ".xls";
-        jobService.importXLS(file.getInputStream(), newImportJob, importFileName);
         storageService.storeImportFile(file.getInputStream(), importFileName);
+        jobService.importXLS(file.getInputStream(), newImportJob, importFileName);
         return new ResponseEntity<>(newImportJob.getId(), HttpStatus.OK);
     }
 
